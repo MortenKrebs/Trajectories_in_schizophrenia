@@ -9,3 +9,8 @@ x+y
 ````
 
 above is a formula
+
+
+```{python} 
+x+y
+````
