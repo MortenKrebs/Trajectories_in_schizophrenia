@@ -11,6 +11,6 @@ x+y
 above is a formula
 
 
-```{python} 
+```python 
 x+y
 ````
