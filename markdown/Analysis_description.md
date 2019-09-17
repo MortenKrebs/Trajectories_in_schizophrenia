@@ -188,18 +188,7 @@ text(9.5,9,labels = "HR")
 mtext("Second Diagnosis",side=3,line=1)
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{Pair-wise Hazard Ratio of comorbid diagnoses in Schizophrenia}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/MS_heatmap-1.pdf}
-
-\
-
-Color is the log(HR) of disorder 2 (x-axis) given disorder 1 (y axis). Estimates are based on survival analysis with disorder 1 as time-dependent covariat and adjusting for age and gender. Individuals with ties (=diagnosis 1 and 2 given on the same date) are excluded. * indicates p< 0.05/56
-\end{centering}
-
-\end{figure}
 Diagnosis State Sequences:
 --------------------------
 
@@ -284,18 +273,7 @@ legend(x=0.7,y=1, lab[o],
       fill = c(cols[c(1,2,5,3,7,4,6)][o], "white"),cex=.8)
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{Most frequent sequences}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/seqfplot-1.pdf}
-
-\
-
-Top-20 most frequent sequences in first 25 years for individuals followed more than 25 years.
-\end{centering}
-
-\end{figure}
 ``` r
 # For later use a version keeping `"censored"` as a seperate state was created:
 
@@ -593,15 +571,7 @@ ggplot(dt_mds, aes(x=Dim1, y=Dim2, color=factor(n_dia)))+
        color= "Number of comorbid diagnoses")
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{Dimension 1+2 and number of diagnoses}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/Comorb_count-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 first_dia <- melt(dt_mds, id.vars = 'pid', 
                   direction = "long", measure.vars =  list(c(3:12)),
@@ -666,13 +636,6 @@ To asses the association of resulting MDS coordinates with covariates, we tested
 p
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Year of birth}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/DimYear-1.pdf}
-
-\
 
 To asses the association of resulting MDS coordinates with covariates, we tested for association with birthdate, and found a clear assoication with Dimension 1, however, after adjustment for age of diagnosis, the association disappears. We interpret this as a change in the pattern of diagnoses over time.
 \end{centering}
@@ -698,18 +661,6 @@ ggplot(dt_mds, aes(x=Dim1, y=Dim2,
   labs(x="Dimension 1", y="Dimension 2",color= "Sex")
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Distibution by Sex}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/sexDim-1.pdf}
-
-\
-
-Dimensions show associations with sex, which is included as a covariate in downstream analyses.
-\end{centering}
-
-\end{figure}
 ``` r
 ### Dimension Characteristics:
 # To visualize how different variables affected the first three Dimensions. We created histograms where 
@@ -1004,54 +955,17 @@ plist3<- list(p_n[[3]], p_SCZ[[1]], leg_comb,p_10[[3]],p_30[[3]],p_84[[3]])
 do.call("grid.arrange", c(plist1, ncol=3))
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{Dimension 1}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/Dim1-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 do.call("grid.arrange", c(plist2, ncol=3))
 ```
-
-\begin{figure}
-
-\begin{centering}
-\caption{Dimension 2}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/Dim2-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 do.call("grid.arrange", c(plist3, ncol=3))
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Dimension 3}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/Dim3-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 do.call("grid.arrange", c(plist_all, ncol=8))
 ```
-
-\begin{figure}
-
-\begin{centering}
-\caption{Dimension 1-7}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/Dim1_7-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 # Barplot of n_dia
 #ggplot(data = dt_mds[,mean((Dim1-min(Dim1))/diff(range(Dim1))),n_dia],aes(x= n_dia, y = V1))+geom_bar
@@ -1079,15 +993,6 @@ qplot(y=n_dia,x=scale(-Dim1),data=dt_mds[n_dia<7])+
   labs(x="Dim1", y="Number of diagnoses",color="Model")
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/descript_regress-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 # Child_dia ~ Dim2:
   
@@ -1103,15 +1008,6 @@ ggplot(aes(fill=!is.na(F90),x=scale(Dim2)),data=dt_mds)+geom_density()+theme_bw(
                               ", AIC=", round(s1$aic,0) ),x=2.5,y=.5,size=5)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/descript_regress-2.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 ggplot(aes(fill=!is.na(F30),x=scale(Dim2)),data=dt_mds)+geom_density()+theme_bw()+labs(fill="Mood disorder",x="Dim2") +
   annotate("text",label=paste0("exp(beta)= ",round(exp(s2$coefficients[2,1]),3),
@@ -1119,15 +1015,6 @@ ggplot(aes(fill=!is.na(F30),x=scale(Dim2)),data=dt_mds)+geom_density()+theme_bw(
                               ", AIC=", round(s2$aic,0) ),x=2.5,y=.5,size=5)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/descript_regress-3.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 s1 <- summary(glm(formula = !is.na(F10)~I(scale(Dim3)),family = "binomial",data=dt_mds))
 c1 <- exp(confint(glm(formula = !is.na(F10)~I(scale(Dim3)),family = "binomial",data=dt_mds)))
@@ -1140,15 +1027,6 @@ ggplot(aes(fill=!is.na(F10),x=scale(Dim3)),data=dt_mds)+geom_density()+theme_bw(
                               ", AIC=", round(s2$aic,0) ),x=.5,y=1,size=3)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/descript_regress-4.pdf}
-
-\end{centering}
-
-\end{figure}
 Clustering
 ----------
 
@@ -1159,15 +1037,6 @@ range <- as.clustrange(clust, diss = dist(dt_mds[,.(Dim1,Dim2,Dim3)]),ncluster =
 qplot(2:8,range$stats$R2)+geom_line()+labs(y="R2",x="Clusters")
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Clustering R2}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/hclustR2-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 dt3 <- dt[!is.na(case2012)]
 dt3[,cl5:= factor(cutree(clust,5))]
@@ -1224,15 +1093,6 @@ g2 <-arrangeGrob(p_list[[3]],p_list[[4]],p_list[[5]],p_list[[6]],layout_matrix=l
 grid.arrange(g1,g2, top="Results of  k=5 clustering")
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{k=5 clustering}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/hclust_plot-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ### Cluster stability assessment
 
 Clustering was repeated with 100 bootstap permutations of the MDS-dimensions. The overlap between the clustering of the full dataset and the bootstrap permutations was assessed using the mean jaccard coefficient.
@@ -1245,26 +1105,6 @@ kable(data.frame(N=table(boot$partition),Jaccard=boot$bootmean,Recovered=boot$bo
                  Dissolved= boot$bootbrd),format="latex",booktabs=T)
 ```
 
-\begin{table}
-
-\caption{\label{tab:clust.stab}Cluster Stability}
-\centering
-\begin{tabular}[t]{rrr}
-\toprule
-Cluster & N & Jaccard\\
-\midrule
-1 & 597 & 0.6552152\\
-2 & 1580 & 0.5962693\\
-3 & 734 & 0.3458341\\
-4 & 729 & 0.6499494\\
-5 & 1792 & 0.7256697\\
-\bottomrule
-\multicolumn{3}{l}{\textit{Note: }}\\
-\multicolumn{3}{l}{MDS and clustering was repeated in 100 random subset (size 2/3) of the sequences.}\\
-\multicolumn{3}{l}{The overlap between the clustering of the full dataset and the bootstrap permutations was assessed}\\
-\multicolumn{3}{l}{using the mean jaccard coefficient.}\\
-\end{tabular}
-\end{table}
 ``` r
 # Visualizing stability using `WGCNA`:
 labels <- matrix(NA, ncol=length(boot$partition), nrow=101)
@@ -1293,45 +1133,11 @@ plotDendroAndColors(boot$result$result,t(colors), main="",
                     dendroLabels =F, hang=.03,autoColorHeight = T)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Stability of Clustering}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/WGCNA-1.pdf}
-
-\
-
-Above: dendrogram of the hierarchical agglomerative clustering. Below: Results of clusterings repeated on 100 random subsets of the data. For each permutation k=3-MDS was computed, and subsequently k=5-clustering was perfomed.
-\end{centering}
-
-\end{figure}
 ``` r
 # Load additional genetic and registry variables
 load("additional.Rda")
 ```
 
-\begin{table}
-
-\caption{\label{tab:Sumstats}Summary Statistics used for
-      Polygenic Score Calculations}
-\centering
-\begin{tabular}[t]{lrrrl}
-\toprule
-Phenotype & n.cases & n.controls & PMID & .\\
-\midrule
-Bipolar Affective Disorder & 9412 & 137760 & 173062 & Biorxiv\\
-Depressive Symptoms & 161460 & NA & 27089181 & \\
-Education, Years & 293723 & NA & 27225129 & \\
-Extraversion & 160713 & NA & 24828478 & \\
-Intelligence & 269867 & NA & 29942086 & \\
-\addlinespace
-Neuroticism & 170911 & NA & 27089181 & \\
-Schizophrenia & 36989 & 113075 & 25056061 & \\
-\bottomrule
-\multicolumn{5}{l}{\textit{Note: }}\\
-\multicolumn{5}{l}{n cases indicate number of cases in the discovery sample}\\
-\end{tabular}
-\end{table}
 ``` r
 source("~/trajectory/single/all/script/Nagelkerke.R")
 
@@ -1371,33 +1177,6 @@ paste0("P-values printed in bold indicates p","$<$","0.0001)."),
 paste0("\\\\", footnote_marker_symbol(1), ": Based on a binomial logistic regression of 2861 cases and 18843"), "controls,adjusting for age, sex, 10 principal components of genetic similarity and genotype wave."),escape=F)
 ```
 
-\begin{table}
-
-\caption{\label{tab:PRS_assoc}Association with Schizophrenia}
-\centering
-\begin{tabular}[t]{lrr}
-\toprule
-Phenotype & p<sup>*</sup> & R2<sup>*</sup>\\
-\midrule
-\textbf{Bipolar Affective Disorder} & \textbf{5.03e-18} & \textbf{0.0069}\\
-\textbf{Depressive Symptoms} & \textbf{1.30e-21} & \textbf{0.0084}\\
-\textbf{Education, Years} & \textbf{3.56e-05} & \textbf{0.0015}\\
-Extraversion & 1.12e-02 & 0.0006\\
-Intelligence & 3.86e-01 & 0.0001\\
-\addlinespace
-\textbf{Neuroticism} & \textbf{2.35e-23} & \textbf{0.0091}\\
-\textbf{Schizophrenia} & \textbf{3.63e-39} & \textbf{0.0158}\\
-\bottomrule
-\multicolumn{3}{l}{\textit{Note: }}\\
-\multicolumn{3}{l}{Polygenic Scores were computed for Chromosomes 1-22 using LDpred. Imputation was done using the}\\
-\multicolumn{3}{l}{ Hapmap3 (n=1457897) reference panel. All SNPs with an info Score >0.8 and MAF >0.05 were included}\\
-\multicolumn{3}{l}{(No p-valusthresholding). LDradius was set to 200 (default in LDpred) PseudoR2 is calculated using}\\
-\multicolumn{3}{l}{ Nagelkerke's - comparing the full model to the model without the PGS.}\\
-\multicolumn{3}{l}{P-values printed in bold indicates p$<$0.0001).}\\
-\multicolumn{3}{l}{\<sup>*</sup>: Based on a binomial logistic regression of 2861 cases and 18843}\\
-\multicolumn{3}{l}{controls,adjusting for age, sex, 10 principal components of genetic similarity and genotype wave.}\\
-\end{tabular}
-\end{table}
 ``` r
 # Merge MDS with risk variables:
 
@@ -1436,20 +1215,6 @@ kable(t(data.frame("N"=table(data$apgar5)[table(data$apgar5)>4])),
 "APGAR 5: Appearance, Pulse, Grimace, Activity, Respiration at 5 minutes")
 ```
 
-\begin{table}
-
-\caption{\label{tab:APGAR}Distribution of APGAR Scores in cohort -omitting counts <5}
-\centering
-\begin{tabular}[t]{lrrrrrrr}
-\toprule
-  & 0 & 5 & 6 & 7 & 8 & 9 & 10\\
-\midrule
-N & 15 & 10 & 18 & 34 & 85 & 221 & 4978\\
-\bottomrule
-\multicolumn{8}{l}{\textit{Note: }}\\
-\multicolumn{8}{l}{APGAR 5: Appearance, Pulse, Grimace, Activity, Respiration at 5 minutes}\\
-\end{tabular}
-\end{table}
 ``` r
 #names(table(data$"Birth Length")[table(data$"Birth Length")>0])
 leng=data$"Birth Length"
@@ -1461,37 +1226,6 @@ ggplot(data[!`Birth Length` %in%as.numeric(names(rare))], aes(`Birth Length`))+
   geom_histogram(binwidth=2,fill="steelblue")+labs(title="Birth Length (N= 5315)")
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Birth Length}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/BL-1.pdf}
-
-\end{centering}
-
-\end{figure}
-``` r
-  theme(panel.grid.major = element_blank(), 
-        panel.grid.minor = element_blank(),
-        panel.background = element_blank(),
-        axis.line = element_line(colour = "black"))
-## List of 4
-##  $ panel.grid.major: list()
-##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-##  $ panel.grid.minor: list()
-##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-##  $ panel.background: list()
-##   ..- attr(*, "class")= chr [1:2] "element_blank" "element"
-##  $ axis.line       :List of 4
-##   ..$ colour  : chr "black"
-##   ..$ size    : NULL
-##   ..$ linetype: NULL
-##   ..$ lineend : NULL
-##   ..- attr(*, "class")= chr [1:2] "element_line" "element"
-##  - attr(*, "class")= chr [1:2] "theme" "gg"
-##  - attr(*, "complete")= logi FALSE
-##  - attr(*, "validate")= logi TRUE
-```
 
 ``` r
 regular_plot <- knit_hooks$get("plot")
@@ -1523,24 +1257,6 @@ ggplot(data, aes(`Birth Weight`))+geom_histogram(binwidth=.20,fill="steelblue")+
         axis.line = element_line(colour = "black"))
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Birth Weight Score}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/BWS-1.pdf}
-
-\
-
-When calculating the value of birth weight score all singletons in the MBR born between 1981 and 2005 and 
-having information of birth weight as well as gestational age were divided according to sex,
-gestational age in weeks, and for persons with gestational age of 28 weeks or more also into the
-following groups of calendar year at date of birth: 1981-1985, 1986-1990, 1991-1995, 1996-2000, 
-2001-2005. The variable birth weight score contains the proportion of persons with same sex, gestational age,
-and calendar period (only if gestational age is 28 weeks or larger) who have the same or a smaller
-birth weight than the index person.
-\end{centering}
-
-\end{figure}
 ``` r
 data$C_RYGER[data$C_RYGER==99]=NA
 data$"Maternal Smoking in Pregnancy" <- data$B_RYGER
@@ -1557,26 +1273,6 @@ kable(t(data.frame("N"=data[,.N,`Maternal Smoking in Pregnancy`][,N],row.names =
 "In the analysis smoking during pregnacy is treated as a binary."))
 ```
 
-\begin{table}
-
-\caption{\label{tab:smoke}Maternal Smoking during Pregnancy}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{20em}>{\raggedright\arraybackslash}p{20em}ll}
-\toprule
-  & Unknown & No & Yes\\
-\midrule
-N & 4342 & 565 & 525\\
-\bottomrule
-\multicolumn{4}{l}{\textit{Note: }}\\
-\multicolumn{4}{l}{Maternal smoking was not in the register before 1991.}\\
-\multicolumn{4}{l}{From 1991 to 1996 it was registered as a binary (smoker of non-smoker).}\\
-\multicolumn{4}{l}{In the period 1997 to 2005 the register had more refined data, but this was transformed in a binary}\\
-\multicolumn{4}{l}{(non-smoker=non-smoker. smoker= smoker, stopped smoking during the first trimester, stopped smoking}\\
-\multicolumn{4}{l}{after the first trimester, smokes at most 5 cigarettes daily, smokes 6-10 cigarettes daily, smokes}\\
-\multicolumn{4}{l}{11-20 cigarettes daily, smokes more than 20 cigarettes daily or smoker quantity unspecified).}\\
-\multicolumn{4}{l}{In the analysis smoking during pregnacy is treated as a binary.}\\
-\end{tabular}
-\end{table}
 ``` r
 
 data$wave[is.na(data$wave)]="Other"
@@ -1596,20 +1292,6 @@ kable(t(data.frame("N"=data[,.N,`Sectio`][,N],row.names = c("No","Yes","Unknown"
 "..."))
 ```
 
-\begin{table}
-
-\caption{\label{tab:sectio}Sectio according to the Medical Birth Registry}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{20em}>{\raggedright\arraybackslash}p{20em}ll}
-\toprule
-  & No & Yes & Unknown\\
-\midrule
-N & 5109 & 207 & 116\\
-\bottomrule
-\multicolumn{4}{l}{\textit{Note: }}\\
-\multicolumn{4}{l}{...}\\
-\end{tabular}
-\end{table}
 ``` r
 
 data$wave[is.na(data$wave)]="Other"
@@ -1660,20 +1342,6 @@ ggplot(data[!`Number of hospitalizations (SCZ)` %in%as.numeric(names(rare))]
         axis.line = element_line(colour = "black")))
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Number of Hospitalizations}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/n_hosp-1.pdf}
-
-\
-
-All psychiatric hospital contacts with Schizophrenia as either main diagnosis
-(aktionsdiagnose/hoveddiagnose) or basic diagnosis (grundmorbus) in the Danish Psychiatric Central
-Research Register complete until December 31, 2016.
-\end{centering}
-
-\end{figure}
 ``` r
 
 data$"Number of hospitalizations (SCZ)" <- log10(data$`Number of hospitalizations (SCZ)`+1)
@@ -1724,24 +1392,7 @@ ggplot(data[!`Total time hospitalized (SCZ)` %in%as.numeric(names(rare))], aes(l
         axis.line = element_line(colour = "black")))
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{Total time hospitalized}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/t_hosp-1.pdf}
-
-\
-
-Contains the total number of days admitted as 24 hour inpatient with a Schizophrenia diagnosis.
-For an admission date of the admission (unfinished admission)
-the admission is presumed ongoing until December 31, 2016. An exception for this rule is when
-the person has another contact in the Danish Psychiatric Central Research Register starting after
-the first unfinished admission (ptype = 0). In this case all unfinished admissions with ptype = 0
-for this person are counted as having a duration of 1 day only.
-For persons with overlapping admissions with patient type 0 each day only counts once. 
-\end{centering}
-
-\end{figure}
 ``` r
 data$`Total time hospitalized (SCZ)` <- log10(data$`Total time hospitalized (SCZ)`+1)
 ind_sev <- c(103,105); names(data)[ind_sev]
@@ -1763,23 +1414,7 @@ data[,.N,`Maternal Infection during Pregnancy, Bacterial`][,N],
 "prior to the date of birth that corresponded to the gestational age of the child."))
 ```
 
-\begin{table}
 
-\caption{\label{tab:preg_inf}Maternal Infection during Pregnancy}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{20em}ll}
-\toprule
-  & Viral & Bacterial\\
-\midrule
-no & 5412 & 5270\\
-yes & 20 & 162\\
-\bottomrule
-\multicolumn{3}{l}{\textit{Note: }}\\
-\multicolumn{3}{l}{From the National Patient Register, information an maternal infections during pregnancy was obtained.}\\
-\multicolumn{3}{l}{It was defined as a maternal diagnosis of infection (bacterial and viral) within a period of time}\\
-\multicolumn{3}{l}{prior to the date of birth that corresponded to the gestational age of the child.}\\
-\end{tabular}
-\end{table}
 ``` r
 kable(
 data.frame("Viral"= data[,.N,`Viral Infection`][,N], 
@@ -1792,21 +1427,7 @@ data.frame("Viral"= data[,.N,`Viral Infection`][,N],
              "National Patient Register was used to to identify patients diagnosed with infections")
 ```
 
-\begin{table}
 
-\caption{\label{tab:infektio}Infections}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}>{\raggedright\arraybackslash}p{5em}ll}
-\toprule
-  & Viral & Bacterial & CNS & Otitis\\
-\midrule
-no & 4442 & 3905 & 5378 & 4940\\
-yes & 990 & 1527 & 54 & 492\\
-\bottomrule
-\multicolumn{5}{l}{\textit{Note: }}\\
-\multicolumn{5}{l}{National Patient Register was used to to identify patients diagnosed with infections}\\
-\end{tabular}
-\end{table}
 ``` r
 kable( 
 data.frame("Schizophrenia"= 
@@ -1825,25 +1446,7 @@ data.frame("Schizophrenia"=
 "with parental history of mental disorders"))
 ```
 
-\begin{table}
 
-\caption{\label{tab:parental}Parental history of mental disorders}
-\centering
-\begin{tabular}[t]{lrrrr}
-\toprule
-\multicolumn{1}{c}{ } & \multicolumn{2}{c}{Paternal} & \multicolumn{2}{c}{Maternal} \\
-\cmidrule(l{2pt}r{2pt}){2-3} \cmidrule(l{2pt}r{2pt}){4-5}
-  & Schizophrenia & Any.Psychiatric & Schizophrenia. & Any.Psychiatric.\\
-\midrule
-no & 5232 & 4251 & 5210 & 3980\\
-yes & 86 & 1095 & 80 & 1372\\
-Unknown & 114 & 86 & 142 & 80\\
-\bottomrule
-\multicolumn{5}{l}{\textit{Note: }}\\
-\multicolumn{5}{l}{National Patient Register was used to to identify patients}\\
-\multicolumn{5}{l}{with parental history of mental disorders}\\
-\end{tabular}
-\end{table}
 ``` r
 ### PGS distributions
 
@@ -1858,15 +1461,7 @@ p <- lapply(ind_prs, function(x){
 do.call('grid.arrange',p)
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/prs_dist-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 ### Association Analysis
 
@@ -2101,15 +1696,6 @@ corr.plot <- corrplot(betas2[,1:3], is.corr=FALSE, p.mat=p.vals2[,1:3],
                       tl.col="black", bg="#fffffc",ssl.pos = "r",ssl.lev=6,full_col=F)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/corrplot-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 # Association with genetic and register variables is tested using MANCOVA with MDS dimensions as 
 # dependent variables and risk variables as independent variables, adjusting for age, sex and for 
@@ -2135,52 +1721,6 @@ kable(Mancova_table
 "For genetic varibles adjustning additionally for 10 principal components and genotype wave."))
 ```
 
-\begin{table}
-
-\caption{\label{tab:Mancova_full}MANCOVA Results}
-\centering
-\begin{tabular}[t]{lrrr}
-\toprule
-  & N & Fstat & p.val\\
-\midrule
-PGS - Bipolar Affective Disorder & 2147 & 0.9 & 4.5e-01\\
-PGS - Depressive Symptoms & 2147 & 3.0 & 3.0e-02\\
-PGS - Education, Years & 2147 & 7.0 & 1.2e-04\\
-PGS - Neuroticism & 2147 & 2.6 & 5.4e-02\\
-PGS - Schizophrenia & 2147 & 1.6 & 1.8e-01\\
-\addlinespace
-Disruptive or Damaging Mutations & 2972 & 3.2 & 2.4e-02\\
-Synonymous Mutations & 2972 & 1.8 & 1.4e-01\\
-Maternal Age & 4383 & 14.0 & 4.6e-09\\
-Paternal Age & 4324 & 6.6 & 1.9e-04\\
-Birth Length & 5315 & 11.6 & 1.4e-07\\
-\addlinespace
-apgar5 & 5370 & 2.1 & 1.0e-01\\
-Gestational Age & 4311 & 2.8 & 4.0e-02\\
-Birth Weight & 4297 & 7.9 & 2.8e-05\\
-Maternal Smoking in Pregnancy & 1090 & 5.3 & 1.3e-03\\
-Sectio & 5316 & 0.4 & 7.3e-01\\
-\addlinespace
-Otitis Infection & 5432 & 4.4 & 4.4e-03\\
-Bacterial Infection & 5432 & 22.1 & 3.3e-14\\
-CNS Infection & 5432 & 0.4 & 7.9e-01\\
-Viral Infection & 5432 & 6.0 & 4.7e-04\\
-Maternal Infection during Pregnancy, Bacterial & 5432 & 3.0 & 2.8e-02\\
-\addlinespace
-Maternal Infection during Pregnancy, Viral & 5432 & 2.2 & 8.4e-02\\
-Maternal Diagnosis, Any Psychiatric & 5352 & 21.1 & 1.3e-13\\
-Maternal Diagnosis, Schizophrenia & 5352 & 6.5 & 2.3e-04\\
-Paternal Diagnosis, Any Psychiatric & 5346 & 8.4 & 1.4e-05\\
-Paternal Diagnosis, Schizophrenia & 5346 & 4.4 & 4.3e-03\\
-\addlinespace
-Number of hospitalizations (SCZ) & 5432 & 113.9 & 1.6e-71\\
-Total time hospitalized (SCZ) & 5432 & 57.8 & 8.6e-37\\
-\bottomrule
-\multicolumn{4}{l}{\textit{Note: }}\\
-\multicolumn{4}{l}{MANCOVAs done with first three dimensions of MDS as dependent variable, adjusting for age and sex.}\\
-\multicolumn{4}{l}{For genetic varibles adjustning additionally for 10 principal components and genotype wave.}\\
-\end{tabular}
-\end{table}
 ``` r
 #Subset for main text:
 tab2 <- cbind(Mancova_table[rownames(Mancova_table) %in% rownames(betas),],
@@ -2204,51 +1744,7 @@ kable(tab2,
 "PCRR: Psychiatric Cental Research Registry"))
 ```
 
-\begin{table}
 
-\caption{\label{tab:Mancova_sub}Association tests}
-\centering
-\begin{tabular}[t]{lrrrrrrrrr}
-\toprule
-\multicolumn{2}{c}{ } & \multicolumn{2}{c}{MANCOVA results} & \multicolumn{6}{c}{Post-hoc regressions} \\
-\cmidrule(l{2pt}r{2pt}){3-4} \cmidrule(l{2pt}r{2pt}){5-10}
-\multicolumn{4}{c}{ } & \multicolumn{2}{c}{Dim1} & \multicolumn{2}{c}{Dim2} & \multicolumn{2}{c}{Dim3} \\
-\cmidrule(l{2pt}r{2pt}){5-6} \cmidrule(l{2pt}r{2pt}){7-8} \cmidrule(l{2pt}r{2pt}){9-10}
-  & N & Fstat & p.val & coef & p & coef & p & coef & p\\
-\midrule
-\addlinespace[0.3em]
-\multicolumn{10}{l}{\textbf{Genetic variables}}\\
-\hspace{1em}PGS - Education, Years & 2147 & 7.0 & 1.2e-04 & 0.21 & 1.0e-02 & -0.10 & 4.3e-02 & 0.14 & 1.1e-03\\
-\addlinespace[0.3em]
-\multicolumn{10}{l}{\textbf{National Birth Registry}}\\
-\hspace{1em}Maternal Age & 4383 & 14.0 & 4.6e-09 & 0.04 & 9.8e-04 & -0.02 & 4.8e-03 & 0.03 & 1.5e-06\\
-\hspace{1em}Paternal Age & 4324 & 6.6 & 1.9e-04 & 0.02 & 1.4e-02 & -0.01 & 2.6e-01 & 0.02 & 3.0e-04\\
-\hspace{1em}Birth Length & 5315 & 11.6 & 1.4e-07 & 0.05 & 1.3e-02 & -0.02 & 1.6e-01 & 0.05 & 1.7e-07\\
-\hspace{1em}Birth Weight & 4297 & 7.9 & 2.8e-05 & 0.43 & 3.4e-02 & -0.30 & 9.8e-03 & 0.37 & 4.4e-04\\
-\hspace{1em}Maternal Smoking in Pregnancy & 1090 & 5.3 & 1.3e-03 & -0.71 & 2.2e-03 & 0.10 & 5.5e-01 & -0.29 & 2.0e-02\\
-\addlinespace[0.3em]
-\multicolumn{10}{l}{\textbf{National Patient Registry}}\\
-\hspace{1em}Bacterial Infection & 5432 & 22.1 & 3.3e-14 & -0.93 & 4.7e-15 & 0.00 & 9.7e-01 & -0.17 & 8.2e-03\\
-\hspace{1em}Viral Infection & 5432 & 6.0 & 4.7e-04 & -0.54 & 6.6e-05 & 0.10 & 2.2e-01 & -0.07 & 3.5e-01\\
-\addlinespace[0.3em]
-\multicolumn{10}{l}{\textbf{Family History}}\\
-\hspace{1em}Maternal, Any Psychiatric & 5352 & 21.1 & 1.3e-13 & -0.85 & 5.8e-12 & 0.18 & 1.4e-02 & -0.22 & 5.3e-04\\
-\hspace{1em}Maternal, Schizophrenia & 5352 & 6.5 & 2.3e-04 & -0.23 & 4.9e-01 & 0.77 & 6.7e-05 & -0.27 & 1.2e-01\\
-\hspace{1em}Paternal, Any Psychiatric & 5346 & 8.4 & 1.4e-05 & -0.54 & 5.0e-05 & 0.06 & 4.2e-01 & -0.21 & 2.0e-03\\
-\addlinespace[0.3em]
-\multicolumn{10}{l}{\textbf{Outcome variables (PCRR)}}\\
-\hspace{1em}Number of hospitalizations (SCZ) & 5432 & 113.9 & 1.6e-71 & -2.64 & 2.0e-29 & -0.65 & 1.1e-06 & -1.71 & 5.2e-46\\
-\hspace{1em}Total time hospitalized (SCZ) & 5432 & 57.8 & 8.6e-37 & -0.49 & 1.5e-10 & -0.12 & 3.7e-03 & -0.45 & 9.5e-31\\
-\bottomrule
-\multicolumn{10}{l}{\textit{Note: }}\\
-\multicolumn{10}{l}{MANCOVAs done with first three dimensions of MDS as dependent variable}\\
-\multicolumn{10}{l}{Post-hoc regressions are linear regressions with the dimension score as dependent variable.}\\
-\multicolumn{10}{l}{Only varibles with significant p-values after adjustment for 27 tests are included.}\\
-\multicolumn{10}{l}{All analyses are adjusting for age and sex PGS-Education is adjusted additionally for 10 principal}\\
-\multicolumn{10}{l}{components and genotype wave.}\\
-\multicolumn{10}{l}{PCRR: Psychiatric Cental Research Registry}\\
-\end{tabular}
-\end{table}
 Replication
 -----------
 
@@ -2520,35 +2016,6 @@ kable(rep,digits=c(1,1,32),format="latex",booktabs=T,
 "For genetic varibles adjustning additionally for 10 principal components and genotype wave."))
 ```
 
-\begin{table}
-
-\caption{\label{tab:MACOVA_rep}Results of MANCOVAS in replication cohort}
-\centering
-\begin{tabular}[t]{lrr}
-\toprule
- & N & p.val\\
-\midrule
-PGS - Education, Years & 630 & 0.00853\\
-Maternal Age & 856 & 0.00031\\
-Paternal Age & 843 & 0.15960\\
-Birth Length & 851 & 0.80479\\
-Birth Weight & 834 & 0.42617\\
-\addlinespace
-Maternal Smoking in Pregnancy & 459 & 0.00074\\
-Bacterial Infection & 870 & 0.23369\\
-Viral Infection & 870 & 0.16137\\
-Maternal Diagnosis, Any Psychiatric & 858 & 0.43808\\
-Maternal Diagnosis, Schizophrenia & 858 & 0.15617\\
-\addlinespace
-Paternal Diagnosis, Any Psychiatric & 858 & 0.88744\\
-Number of hospitalizations (SCZ) & 857 & 0.00021\\
-Total time hospitalized (SCZ) & 857 & 0.00043\\
-\bottomrule
-\multicolumn{3}{l}{\textit{Note: }}\\
-\multicolumn{3}{l}{Mancova performed with MDS dimension 1-3 as dependent variable, adjusting for age and sex.}\\
-\multicolumn{3}{l}{For genetic varibles adjustning additionally for 10 principal components and genotype wave.}\\
-\end{tabular}
-\end{table}
 ``` r
 #### Replication of Single Dim Associations 
 
@@ -2583,35 +2050,7 @@ kable(rep_coef[,c(1:2,4,3,7), with=F],digits=c(1,1,1,3,3),format="latex",booktab
 "This was done to test for signconcordance."))
 ```
 
-\begin{table}
 
-\caption{\label{tab:signtest}Linear regression in replication cohort}
-\centering
-\begin{tabular}[t]{llrrr}
-\toprule
- & dim & N & coef\_main & coef\\
-\midrule
-Maternal Smoking in Pregnancy & Dim1 & 459 & -0.713 & -0.112\\
-Bacterial Infection & Dim1 & 870 & -0.930 & -0.521\\
-Viral Infection & Dim1 & 870 & -0.541 & -0.506\\
-Maternal Diagnosis, Any Psychiatric & Dim1 & 858 & -0.846 & -0.307\\
-Paternal Diagnosis, Any Psychiatric & Dim1 & 858 & -0.544 & -0.146\\
-\addlinespace
-Maternal Diagnosis, Schizophrenia & Dim2 & 858 & 0.767 & -0.681\\
-PGS - Education, Years & Dim3 & 630 & 0.141 & 0.224\\
-Maternal Age & Dim3 & 856 & 0.029 & 0.040\\
-Paternal Age & Dim3 & 843 & 0.018 & 0.003\\
-Birth Length & Dim3 & 851 & 0.054 & 0.022\\
-\addlinespace
-Birth Weight & Dim3 & 834 & 0.372 & 0.003\\
-Number of hospitalizations (SCZ) & Dim3 & 857 & -1.706 & -0.118\\
-Total time hospitalized (SCZ) & Dim3 & 857 & -0.450 & -0.084\\
-\bottomrule
-\multicolumn{5}{l}{\textit{Note: }}\\
-\multicolumn{5}{l}{Linear regression performed for the dimension for the dimension with the stongest association.}\\
-\multicolumn{5}{l}{This was done to test for signconcordance.}\\
-\end{tabular}
-\end{table}
 Sensitivity
 -----------
 
@@ -2763,70 +2202,9 @@ kable(p.mat,digits=100,format="latex",booktabs=T, caption="Associations of
 "and genotype wave."))
 ```
 
-\begin{table}
-
-\caption{\label{tab:MANCOVA_sens}Associations of 
-      significant variables across different parameter permutations in 
-      25-year subset}
-\centering
-\resizebox{\linewidth}{!}{
-\begin{tabular}[t]{lrrrrrrrrrrrrrrrr}
-\toprule
-  & OM\_jacc\_.5 & OM\_jacc\_1 & HAM\_jacc & OM\_smc\_.5 & OM\_smc\_1 & HAM\_smc & OM\_const\_.5 & OM\_const\_1 & HAM\_const & eucl\_2 & chi2\_2 & eucl\_5 & chi2\_5 & eucl\_12 & chi2\_12 & With imputation\\
-\midrule
-PGS - Education, Years (N=1024) & 4.8e-01 & 4.8e-01 & 4.8e-01 & 1.0e-01 & 1.0e-01 & 1.0e-01 & 6.8e-01 & 7.9e-01 & 7.9e-01 & 9.0e-01 & 0.42 & 9.4e-01 & 0.123 & 5.8e-01 & 0.1300 & 1.6e-01\\
-Maternal Age (N=2584) & 1.1e-04 & 1.8e-04 & 1.8e-04 & 2.5e-04 & 2.5e-04 & 2.5e-04 & 2.8e-03 & 4.0e-03 & 4.1e-03 & 1.0e-02 & 0.43 & 1.2e-02 & 0.060 & 9.2e-03 & 0.0256 & 2.1e-06\\
-Paternal Age (N=2545) & 4.2e-02 & 5.5e-02 & 5.5e-02 & 5.3e-02 & 5.3e-02 & 5.3e-02 & 5.4e-02 & 9.6e-02 & 9.6e-02 & 2.3e-01 & 1.00 & 2.5e-01 & 0.865 & 1.1e-01 & 0.7579 & 1.8e-03\\
-Birth Length (N=3440) & 6.0e-04 & 7.8e-04 & 7.8e-04 & 6.1e-04 & 6.1e-04 & 6.1e-04 & 4.6e-03 & 6.2e-03 & 6.4e-03 & 4.5e-02 & 0.61 & 3.7e-02 & 0.142 & 2.9e-02 & 0.1144 & 6.4e-04\\
-Birth Weight (N=2551) & 7.1e-02 & 1.1e-01 & 1.1e-01 & 1.4e-01 & 1.4e-01 & 1.4e-01 & 1.6e-01 & 4.1e-01 & 4.1e-01 & 1.5e-01 & 0.17 & 1.1e-01 & 0.664 & 5.3e-02 & 0.5363 & 3.0e-02\\
-\addlinespace
-Bacterial Infection (N=3508) & 4.1e-11 & 8.4e-11 & 8.4e-11 & 2.8e-09 & 2.8e-09 & 2.8e-09 & 7.3e-09 & 3.0e-08 & 3.0e-08 & 1.5e-08 & 0.31 & 1.1e-08 & 0.850 & 8.6e-09 & 0.7072 & 4.3e-11\\
-Viral Infection (N=3508) & 2.8e-03 & 2.8e-03 & 2.8e-03 & 9.4e-03 & 9.4e-03 & 9.4e-03 & 3.9e-03 & 4.1e-03 & 4.1e-03 & 2.7e-03 & 0.87 & 2.6e-03 & 0.824 & 1.6e-03 & 0.4550 & 4.9e-03\\
-Maternal Diagnosis, Any Psychiatric (N=3451) & 3.0e-08 & 1.1e-08 & 1.1e-08 & 1.6e-09 & 1.6e-09 & 1.6e-09 & 1.4e-06 & 2.6e-07 & 2.6e-07 & 3.4e-07 & 0.54 & 4.8e-07 & 0.129 & 9.8e-07 & 0.0046 & 6.4e-10\\
-Maternal Diagnosis, Schizophrenia (N=3451) & 4.3e-03 & 2.6e-03 & 2.6e-03 & 1.2e-04 & 1.2e-04 & 1.2e-04 & 6.4e-02 & 4.2e-02 & 4.1e-02 & 1.5e-03 & 0.94 & 2.1e-03 & 0.427 & 1.5e-01 & 0.2047 & 3.3e-03\\
-Paternal Diagnosis, Any Psychiatric (N=3448) & 7.5e-05 & 6.0e-05 & 6.0e-05 & 3.5e-03 & 3.5e-03 & 3.5e-03 & 3.3e-04 & 8.8e-05 & 8.8e-05 & 5.6e-05 & 0.96 & 4.0e-05 & 0.879 & 9.0e-05 & 0.5567 & 1.2e-03\\
-\addlinespace
-Number of hospitalizations (SCZ) (N=3508) & 4.4e-19 & 4.4e-20 & 4.4e-20 & 8.1e-25 & 8.1e-25 & 8.1e-25 & 6.5e-12 & 5.8e-14 & 6.0e-14 & 5.0e-17 & 0.52 & 3.1e-17 & 0.073 & 3.5e-15 & 0.0415 & 5.9e-43\\
-Total time hospitalized (SCZ) (N=3508) & 2.7e-21 & 2.3e-22 & 2.3e-22 & 9.7e-14 & 9.7e-14 & 9.7e-14 & 1.0e-15 & 1.7e-18 & 1.8e-18 & 1.8e-20 & 0.62 & 6.9e-20 & 0.189 & 1.4e-19 & 0.1331 & 5.4e-26\\
-\bottomrule
-\multicolumn{17}{l}{\textit{Note: }}\\
-\multicolumn{17}{l}{OM = Optimal Matching, HAM= Hamming Distance,}\\
-\multicolumn{17}{l}{Eucl = Euclidian distance (state distribition (number=k)),}\\
-\multicolumn{17}{l}{chi2= chi-squared (state distribition(number=k)),}\\
-\multicolumn{17}{l}{jacc = 1-jaccard coefficient, smc= Simple Matching coefficent,const= Constant Costs.}\\
-\multicolumn{17}{l}{MANCOVAs done with first three dimensions of MDS as dependent variable, adjusting for}\\
-\multicolumn{17}{l}{age and sex.For genetic varibles adjustning additionally for 10 principal components}\\
-\multicolumn{17}{l}{and genotype wave.}\\
-\end{tabular}}
-\end{table}
 ``` r
 apply(p.mat,1,function(x)mean(x<.05))
 ```
-
-    ##              PGS - Education, Years (N=1024) 
-    ##                                        0.000 
-    ##                        Maternal Age (N=2584) 
-    ##                                        0.875 
-    ##                        Paternal Age (N=2545) 
-    ##                                        0.125 
-    ##                        Birth Length (N=3440) 
-    ##                                        0.812 
-    ##                        Birth Weight (N=2551) 
-    ##                                        0.062 
-    ##                 Bacterial Infection (N=3508) 
-    ##                                        0.812 
-    ##                     Viral Infection (N=3508) 
-    ##                                        0.812 
-    ## Maternal Diagnosis, Any Psychiatric (N=3451) 
-    ##                                        0.875 
-    ##   Maternal Diagnosis, Schizophrenia (N=3451) 
-    ##                                        0.688 
-    ## Paternal Diagnosis, Any Psychiatric (N=3448) 
-    ##                                        0.812 
-    ##    Number of hospitalizations (SCZ) (N=3508) 
-    ##                                        0.875 
-    ##       Total time hospitalized (SCZ) (N=3508) 
-    ##                                        0.812
 
 ``` r
 # Onset age and number of Diagnoses
@@ -2856,15 +2234,6 @@ in 25-year follow-up subsample") +
            x = 3.5, y = 8, size = 5)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Onset age and Number of dianoses}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/unnamed-chunk-71-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 
 
@@ -2929,171 +2298,6 @@ Estimates based on a linear regression of Education PGS as function of Schizophr
 fp
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Education PGS Estimates}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/EducationPGS-1.pdf}
-
-\
-
-Estimates based on a linear regression of Education PGS as function of Schizophrenia diagnosis, adjusting for age, sex, 10 principal component and genotype wave. Separate regression were performed for each of the two SCZ subgroups.
-\end{centering}
-
-\end{figure}
-``` r
-
-####    !!!!!! Should be checked 
-# Cl5 ~ Birth Length- comparing to random sample:
-leng=dt_ld2$"Birth Length"
-leng[leng %in%c("A","1","10")]=NA
-leng=as.numeric(as.character(leng))
-dt_ld2$"Birth Length"=leng;rm(leng)
-
-
-mean  <- c(
-coef(lm(`Birth Length`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==5,pid]|random==1] ))[2],
-coef(lm(`Birth Length`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==1,pid]|random==1] ))[2])
-
-conf <- c(
-confint(lm(`Birth Length`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==5,pid]|random==1] ))[2,],
-confint(lm(`Birth Length`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==1,pid]|random==1] ))[2,])
-
-pv  <- c(
-summary(lm(`Birth Length`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==5,pid]|random==1] ))$coefficients[2,4],
-summary(lm(`Birth Length`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==1,pid]|random==1] ))$coefficients[2,4])
-
-label <- paste("Cl",c("5","1"))
-lower <- conf[c(1,3)]
-upper <- conf[c(2,4)]
-
-
-
-df <- data.frame(label, mean, lower, upper, pv=paste("p=",round(pv,7)))
-
-df$label <- factor(df$label, levels=rev(df$label))
-
-fp <- ggplot(data=df, aes(x=label, y=mean, ymin=lower, ymax=upper,label=pv)) +
-        geom_pointrange() + 
-        geom_hline(yintercept=0, lty=2) +  # add a dotted line at x=1 after flip
-        coord_flip() +  # flip coordinates (puts labels on y axis)
-        labs(x="Schizophrenia Subgroup",y="cm",title=
-               "Estimated difference in Birth Length
-             between subgroups of SCZ patients 
-             and random polulation controls") +
-        theme_bw()  +
-        geom_text(nudge_x = .1)
-
-knit_hooks$set(plot = function(x, options) {
-  paste("\n\\begin{figure}\n",         "\n\\begin{centering}\n",         "\\caption{", options$fig.cap, "}\n",
-        "\\includegraphics[width=\\maxwidth]{",
-        opts_knit$get("base.url"), paste(x, collapse = "."),
-        "}\n",
-        "\n\\\n
-Estimates based on a linear regression of Birth Length as function of Schizophrenia diagnosis, adjusting for age and sex. Separate regression were performed for each of the two SCZ subgroups.",
-        "\n\\end{centering}\n",
-        "\n\\end{figure}\n",
-        sep = '')
-})
-
-fp
-```
-
-\begin{figure}
-
-\begin{centering}
-\caption{Birth Length Estimates}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/BirthLen-1.pdf}
-
-\
-
-Estimates based on a linear regression of Birth Length as function of Schizophrenia diagnosis, adjusting for age and sex. Separate regression were performed for each of the two SCZ subgroups.
-\end{centering}
-
-\end{figure}
-``` r
-
-####    !!!!!! Should be checked 
-# Cl5 ~ Maternal Age- comparing to random sample:
-
-mean  <- c(
-coef(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==5,pid]|random==1] ))[2],
-coef(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==2,pid]|random==1] ))[2],
-coef(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==1,pid]|random==1] ))[2])
-
-conf <- c(
-confint(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==5,pid]|random==1] ))[2,],
-confint(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==2,pid]|random==1] ))[2,],
-confint(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==1,pid]|random==1] ))[2,])
-
-pv  <- c(
-summary(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==5,pid]|random==1] ))$coefficients[2,4],
-summary(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==2,pid]|random==1] ))$coefficients[2,4],
-summary(lm(`Maternal Age`~as.numeric(!is.na(case))+gender+birthdate,
-           data=dt_ld2[pid %in% dt3[cl5==1,pid]|random==1] ))$coefficients[2,4])
-
-label <- paste("Cl",c("5","2","1"))
-lower <- conf[c(1,3,5)]
-upper <- conf[c(2,4,6)]
-
-
-
-df <- data.frame(label, mean, lower, upper, pv=paste("p=",round(pv,7)))
-
-df$label <- factor(df$label, levels=rev(df$label))
-
-fp <- ggplot(data=df, aes(x=label, y=mean, ymin=lower, ymax=upper,label=pv)) +
-        geom_pointrange() + 
-        geom_hline(yintercept=0, lty=2) +  # add a dotted line at x=1 after flip
-        coord_flip() +  # flip coordinates (puts labels on y axis)
-        labs(x="Schizophrenia Subgroup",y="years",title=
-               "Estimated difference in Maternal Age
-             between subgroups of SCZ patients 
-             and random polulation controls") +
-        theme_bw()  +
-        geom_text(nudge_x = .1)
-
-knit_hooks$set(plot = function(x, options) {
-  paste("\n\\begin{figure}\n",         "\n\\begin{centering}\n",         "\\caption{", options$fig.cap, "}\n",
-        "\\includegraphics[width=\\maxwidth]{",
-        opts_knit$get("base.url"), paste(x, collapse = "."),
-        "}\n",
-        "\n\\\n
-Estimates based on a linear regression of Maternal Age as function of Schizophrenia diagnosis, adjusting for age and sex. Separate regression were performed for each of the two SCZ subgroups.",
-        "\n\\end{centering}\n",
-        "\n\\end{figure}\n",
-        sep = '')
-})
-
-fp
-```
-
-\begin{figure}
-
-\begin{centering}
-\caption{Maternal Age Estimates}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/MatAge-1.pdf}
-
-\
-
-Estimates based on a linear regression of Maternal Age as function of Schizophrenia diagnosis, adjusting for age and sex. Separate regression were performed for each of the two SCZ subgroups.
-\end{centering}
-
-\end{figure}
 ``` r
 ## Browser 
 
