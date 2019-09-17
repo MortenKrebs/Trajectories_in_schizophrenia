@@ -119,26 +119,6 @@ dt[,censored:= (as.numeric(fdate("31/12/2016"))-as.numeric(birthdate))/365]
 
 An additional non-overlapping cohort of indiviuals born in Denmark between May 1, 1981 and December 31, 2005, and diagnosed with Schizophrenia before December 31, 2016 was obtained for replication. (N=870).
 
-\begin{table}
-
-\caption{\label{tab:define}Comorbidity definitions}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{4.5cm}}
-\toprule
-Diagnosis & ICD.10 & ICD.8\\
-\midrule
-Substance abuse & F10-F19 & 291.x9, 294.39, 303.x9, 303.20, 303.28, 303.90, 304.x9\\
-Mood disorders & F30-39 & 296.x9 (excl 296.89), 298.09, 298.19, 300.49, 301.19\\
-Anxiety disorders and Obsessive compulsive disorder & F40.0-F40.2 F41.0-F41.1 F42 F43.0-F43.1 & 300.39\\
-Eating disorders & F50 & 305.60, 306.50, 306.58, 306.59\\
-Personality disorder & F60 & 305.60, 306.50, 306.58, 306.59\\
-\addlinespace
-Mental Retardation & F70-79 & 301.x9 (excl 301.19), 301.80, 301.81, 301.82, 301.84\\
-Pervasive developmental disorders & F84 & 299.00, 299.01, 299.02, 299.03\\
-Behavioural and emotional disorders with onset usually occurring in childhood and adolescence & F90-98 & 306.x9 308.0x\\
-\bottomrule
-\end{tabular}
-\end{table}
 ``` r
 ## Chisquare of comorbidity:
 # 
@@ -501,22 +481,6 @@ dim(sub.cost_jacc)
 kable(sub.cost_jacc[1:5,1:5],format="latex",booktabs=T, caption = "Substitution cost for the first five states in the alphabet")
 ```
 
-\begin{table}
-
-\caption{\label{tab:sub.cost}Substitution cost for the first five states in the alphabet}
-\centering
-\begin{tabular}[t]{lrrrrr}
-\toprule
-  & censored-> & F1-> & F1.F3-> & F1.F3.F4-> & F1.F3.F4.F50->\\
-\midrule
-censored-> & 0 & 0.00 & 0.00 & 0.00 & 0.00\\
-F1-> & 0 & 0.00 & 0.50 & 0.67 & 0.75\\
-F1.F3-> & 0 & 0.50 & 0.00 & 0.33 & 0.50\\
-F1.F3.F4-> & 0 & 0.67 & 0.33 & 0.00 & 0.25\\
-F1.F3.F4.F50-> & 0 & 0.75 & 0.50 & 0.25 & 0.00\\
-\bottomrule
-\end{tabular}
-\end{table}
 ### Right-censoring:
 
 To calculate dissimilarities between sequences with right censoring, we used inferred states weighted by the probabilities of that state, given the last observed state in the sequence. When calculating the dissimilarity between two sequences \(i\) and \(j\) of unequal length, the dissimilarity, \(D(i,j)\) was defined as:
@@ -587,15 +551,7 @@ ggplot(data=R2, aes(x=k,y=R2)) +
         axis.line = element_line(colour = "black"))
 ```
 
-\begin{figure}
 
-\begin{centering}
-\caption{Cumulative R2 of MDS for increasing number of dimensions}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/R2-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ``` r
 wmd_all <-wcmdscale(dist_unique_OM$dist,w = table(mcor), eig = T)
 par(mfrow=c(3,4))
@@ -603,15 +559,6 @@ for(i in 2:13)
 stressplot(wmd_all, k=i, p.col="blue", l.col="red", lwd=2)
 ```
 
-\begin{figure}
-
-\begin{centering}
-\caption{Stressplots for k=2-13}
-\includegraphics[width=\maxwidth]{Analysis_description_files/figure-markdown_github/Stress-1.pdf}
-
-\end{centering}
-
-\end{figure}
 ### Bootstrap Stability of MDS:
 
 Bootstrap stability of MDS over \(n=100\) bootstrap samples of the dissimilarity matrix. Where stability is measured as the stability coefficient:
