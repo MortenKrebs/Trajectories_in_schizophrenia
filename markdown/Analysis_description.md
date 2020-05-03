@@ -100,27 +100,6 @@ dt[,censored:= (as.numeric(fdate("31/12/2016"))-as.numeric(birthdate))/365]
 An additional non-overlapping cohort of indiviuals born in Denmark between May 1, 1981 and December 31, 2005, and diagnosed with Schizophrenia before December 31, 2016 was obtained for replication. (N=870).
 
 
-\begin{table}
-
-\caption{\label{tab:define}Comorbidity definitions}
-\centering
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{4.5cm}}
-\toprule
-Diagnosis & ICD.10 & ICD.8\\
-\midrule
-Substance abuse & F10-F19 & 291.x9, 294.39, 303.x9, 303.20, 303.28, 303.90, 304.x9\\
-Mood disorders & F30-39 & 296.x9 (excl 296.89), 298.09, 298.19, 300.49, 301.19\\
-Anxiety disorders and Obsessive compulsive disorder & F40.0-F40.2 F41.0-F41.1 F42 F43.0-F43.1 & 300.39\\
-Eating disorders & F50 & 305.60, 306.50, 306.58, 306.59\\
-Personality disorder & F60 & 305.60, 306.50, 306.58, 306.59\\
-\addlinespace
-Mental Retardation & F70-79 & 301.x9 (excl 301.19), 301.80, 301.81, 301.82, 301.84\\
-Pervasive developmental disorders & F84 & 299.00, 299.01, 299.02, 299.03\\
-Behavioural and emotional disorders with onset usually occurring in childhood and adolescence & F90-98 & 306.x9 308.0x\\
-\bottomrule
-\end{tabular}
-\end{table}
-
 
 
 
