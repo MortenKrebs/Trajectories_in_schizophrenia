@@ -21,11 +21,8 @@ library(rmarkdown)
 library(knitr)
 library(kableExtra)
 library(devtools)
-
 library(data.table)
 library(dplyr)
-
-
 library(mstate)
 library(TraMineR)
 library(TraMineRextras)
@@ -33,42 +30,7 @@ library(vegan)
 library(WeightedCluster)
 library(fpc)
 library(WGCNA)
-```
-
-```
-## ==========================================================================
-## *
-## *  Package WGCNA 1.51 loaded.
-## *
-## *    Important note: It appears that your system supports multi-threading,
-## *    but it is not enabled within WGCNA in R. 
-## *    To allow multi-threading within WGCNA with all available cores, use 
-## *
-## *          allowWGCNAThreads()
-## *
-## *    within R. Use disableWGCNAThreads() to disable threading if necessary.
-## *    Alternatively, set the following environment variable on your system:
-## *
-## *          ALLOW_WGCNA_THREADS=<number_of_processors>
-## *
-## *    for example 
-## *
-## *          ALLOW_WGCNA_THREADS=28
-## *
-## *    To set the environment variable in linux bash shell, type 
-## *
-## *           export ALLOW_WGCNA_THREADS=28
-## *
-## *     before running R. Other operating systems or shells will
-## *     have a similar command to achieve the same aim.
-## *
-## ==========================================================================
-```
-
-```r
 library(class)
-
-
 library(ggplot2)
 library(corrplot)
 library(png)
