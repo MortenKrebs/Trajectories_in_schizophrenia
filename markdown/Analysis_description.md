@@ -1,4 +1,4 @@
-This is a document providing the supplementary figures and tables for the paper "Biological Predictors of Psychiatric Trajectories in a Danish Population Cohort of Individuals with Schizophrenia" by Krebs et al.
+This is a document providing the supplementary figures and tables for the paper "Patterns in Comorbid Diagnostic Trajectories of Individuals with Schizophrenia Associate with Etiological Factors" by Krebs et al.
 
 R code is available at [<https://github.com/MortenKrebs/Trajectories_in_schizophrenia>](https://github.com/MortenKrebs/Trajectories_in_schizophrenia).
 
